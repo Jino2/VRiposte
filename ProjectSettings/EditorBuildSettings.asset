@@ -6,14 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SimplePoly Stadium Kit_DemoScene.unity
+    guid: 495e327aeda0368428e600eefc174eaa
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e3026bac70154414f9a4c5991f6e341d,
       type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 21f3192fea4034ef9909c8402e8b8a5f,
       type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: dfe2c39fda73c481fa3bf62ce477b3b0,
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 2b4e2919503fb47f390ac8f6a91189e0,
       type: 2}
     xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 7dec8c9181de045768281c600a3358a7,
       type: 2}
