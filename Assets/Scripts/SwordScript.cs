@@ -22,7 +22,7 @@ public class SwordDetectionScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log($"{other.gameObject.tag} collide!");
+        Debug.Log($"{other.gameObject.name} collide!");
         if (other.gameObject.CompareTag("Enemy"))
         {
             GameManager.GetInstance();
