@@ -25,7 +25,7 @@ public class SwordDetectionScript : MonoBehaviour
         Debug.Log($"{other.gameObject.name} collide!");
         if (other.gameObject.CompareTag("Enemy"))
         {
-            GameManager.GetInstance();
+            // GameManager.GetInstance();
         }
     }
 }
