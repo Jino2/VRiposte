@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
-    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e3026bac70154414f9a4c5991f6e341d,
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 94bbde0be5a66493baabc7fe47cf0bff,
       type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}
@@ -20,5 +20,5 @@ EditorBuildSettings:
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 2b4e2919503fb47f390ac8f6a91189e0,
       type: 2}
-    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 7dec8c9181de045768281c600a3358a7,
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 0e3200d17abb1428091b18b06316d419,
       type: 2}

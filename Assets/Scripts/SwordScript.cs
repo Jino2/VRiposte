@@ -1,17 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Models;
 using UnityEngine;
 
 public class SwordDetectionScript : MonoBehaviour
 {
     public GameObject owner;
+    
     private GameManager gameManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.gameManager = GameManager.GetInstance();
     }
 
     // Update is called once per frame
@@ -22,10 +24,9 @@ public class SwordDetectionScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log($"{other.gameObject.tag} collide!");
         if (other.gameObject.CompareTag("Enemy"))
         {
-            GameManager.GetInstance();
+            gameManager.Hit(CharacterType.Enemy);
         }
     }
 }
