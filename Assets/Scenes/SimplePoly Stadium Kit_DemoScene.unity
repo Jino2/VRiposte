@@ -7301,6 +7301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   remainTimeText: {fileID: 1842068352}
+  playerPointText: {fileID: 963799870}
+  enemyPointText: {fileID: 164627768}
 --- !u!114 &2021453383 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 19064736505062540, guid: f6336ac4ac8b4d34bc5072418cdc62a0,

@@ -6,14 +6,14 @@ using Utils;
 public class GameManager : MonoBehaviour
 {
     public float initTime = 30; 
-    
+    public int playerPoints { get; private set; } = 0;
+    public int enemyPoints { get; private set; } = 0;
+
     private static GameManager instance;
     private GameTimer timer;
     private bool hit = false;
-    private int playerPoints = 0;
-    private int enemyPoints = 0;
-    
-    public static GameManager GetInstance()
+
+   public static GameManager GetInstance()
     {
         if (instance != null) return instance;
 
