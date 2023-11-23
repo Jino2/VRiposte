@@ -1,3 +1,4 @@
+using System;
 using Models;
 using UnityEngine;
 using Utils;
@@ -68,7 +69,18 @@ public class GameManager : MonoBehaviour
     /// </example>
     public void Hit(CharacterType targetType)
     {
-        Debug.Log($"{targetType} is Hit!");
+        switch (targetType)
+        {
+            case CharacterType.Enemy: 
+                playerPoints++;
+                break;
+            
+            case CharacterType.Player:
+                enemyPoints++;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(targetType), targetType, null);
+        }
         // TODO: 맞았을때의 로직 우선 테스트를 위해 타이머만 멈춤
         timer.Pause();
     }
