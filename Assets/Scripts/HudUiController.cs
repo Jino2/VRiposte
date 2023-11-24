@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Models;
 using TMPro;
 using UnityEngine;
 
@@ -8,6 +10,7 @@ public class HudUiController : MonoBehaviour
         public TMP_Text playerPointText;
         public TMP_Text enemyPointText;
         public TMP_Text centerTimerText;
+        public TMP_Text gameResultText;
         
         private GameManager gameManager;
         
@@ -16,11 +19,38 @@ public class HudUiController : MonoBehaviour
             gameManager = GameManager.GetInstance();
         }
 
+
         private void Update()
+        {
+            
+        }
+
+        private void LateUpdate()
         {
             remainTimeText.text = $"{gameManager.GetRemainTime():F4}";
             playerPointText.text = $"{gameManager.playerPoints}";
             enemyPointText.text = $"{gameManager.enemyPoints}";
+            gameResultText.text = GetGameResultString();
+        }
+
+        private string GetGameResultString()
+        {
+            switch (gameManager.result)
+            {
+                case GameResult.None:
+                    gameResultText.gameObject.SetActive(false);
+                    break;
+                case GameResult.PlayerWin:
+                    gameResultText.gameObject.SetActive(true);
+                    return "Win !!";
+                case GameResult.PlayerLose:
+                    gameResultText.gameObject.SetActive(true);
+                    return "Lose..TT";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return null;
         }
 
         public void StartCounter(int timerSeconds = 3)
