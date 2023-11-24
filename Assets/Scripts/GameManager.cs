@@ -1,6 +1,7 @@
 using System;
 using Models;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils;
 
 public class GameManager : MonoBehaviour
@@ -9,10 +10,11 @@ public class GameManager : MonoBehaviour
     public int playerPoints { get; private set; } = 0;
     public int enemyPoints { get; private set; } = 0;
 
+    public UnityEvent resetPlayer = null;
+
     private static GameManager instance;
     private GameTimer timer;
-    private bool hit = false;
-
+    
    public static GameManager GetInstance()
     {
         if (instance != null) return instance;
@@ -49,7 +51,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        hit = false;
         timer.Start();
     }
 
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
     /// </example>
     public void Hit(CharacterType targetType)
     {
+        PauseGame();
         switch (targetType)
         {
             case CharacterType.Enemy: 
@@ -81,7 +83,20 @@ public class GameManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(targetType), targetType, null);
         }
-        // TODO: 맞았을때의 로직 우선 테스트를 위해 타이머만 멈춤
+
+        RestartGame();
+    }
+
+
+    private void PauseGame()
+    {
         timer.Pause();
     }
+
+    private void RestartGame()
+    {
+        resetPlayer?.Invoke();
+        StartGame();
+    }
+    
 }

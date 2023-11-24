@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
     public XRNode inputSource;
-
+    
     private Vector2 inputAxis;
 
     private CharacterController characterController;
 
     [SerializeField] private float speed = 1f;
-
+    
+    
     // Start is called before the first frame update
     void Start()
     {
