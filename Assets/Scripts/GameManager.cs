@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public bool isGamePaused { get; private set; } = true;
     public GameResult result { get; private set; } = GameResult.None;
     public UnityEvent startCountDownEvent = null;
-
+    public UnityEvent actionInitPosition = null;
+    
     private static GameManager instance;
     private GameTimer timer;
 
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         this.timer = new GameTimer(startTime: initTime);
+        actionInitPosition?.Invoke();
         startCountDownEvent?.Invoke();
     }
 
@@ -106,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     private void RestartGame()
     {
+        actionInitPosition?.Invoke();
         startCountDownEvent?.Invoke();
     }
 }

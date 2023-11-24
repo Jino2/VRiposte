@@ -13,8 +13,4 @@ public class GameStageController : MonoBehaviour
         playerObject.transform.position = stageMid - (transform.forward* 1.0f);
         enemyObject.transform.position = stageMid + (transform.forward* 1.0f);
     }
-
-    public void ResetStage()
-    {
-    }
 }
