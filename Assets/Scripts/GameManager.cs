@@ -2,6 +2,7 @@ using System;
 using Models;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Utils;
 
 public class GameManager : MonoBehaviour
@@ -10,9 +11,10 @@ public class GameManager : MonoBehaviour
     public int playerPoints { get; private set; } = 0;
     public int enemyPoints { get; private set; } = 0;
     public bool isGamePaused { get; private set; } = true;
-
-    public UnityEvent onHit = null;
-
+    public GameResult result { get; private set; } = GameResult.None;
+    public UnityEvent startCountDownEvent = null;
+    public UnityEvent actionInitPosition = null;
+    
     private static GameManager instance;
     private GameTimer timer;
 
@@ -35,7 +37,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         this.timer = new GameTimer(startTime: initTime);
-        onHit?.Invoke();
+        actionInitPosition?.Invoke();
+        startCountDownEvent?.Invoke();
     }
 
     // Update is called once per frame
@@ -59,7 +62,14 @@ public class GameManager : MonoBehaviour
     public void FinishGame()
     {
         timer.Pause();
-        //TODO: 점수 계산 및 결과 출력
+        this.result = GetResultByPoint();
+    }
+
+    
+    // TODO : 시간 다됐을때 결과 안나도 끝남.. 처리 필요한데 일단 15분이라는 시간안에는 게임이 끝날것같아서 미룸
+    private GameResult GetResultByPoint()
+    {
+        return playerPoints > enemyPoints ? GameResult.PlayerWin : GameResult.PlayerLose;
     }
 
 
@@ -85,8 +95,8 @@ public class GameManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(targetType), targetType, null);
         }
-
-        RestartGame();
+        if(playerPoints < 15 && enemyPoints < 15 ) RestartGame();
+        else FinishGame();
     }
 
 
@@ -98,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     private void RestartGame()
     {
-        onHit?.Invoke();
+        actionInitPosition?.Invoke();
+        startCountDownEvent?.Invoke();
     }
 }
