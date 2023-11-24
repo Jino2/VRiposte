@@ -74,13 +74,13 @@ public class GameManager : MonoBehaviour
 
 
     /// <summary>
-    /// 캐릭터가 맞은걸 알려줍니다
+    /// 캐릭터가 점수를 잃었다고 gamemanager에 알립니다.
     /// </summary>
     /// <param name="targetType">맞은 대상</param>
     /// <example>
     /// Hit(CharacterType.Enemy) => player가 enemy를 친경우
     /// </example>
-    public void Hit(CharacterType targetType)
+    public void LosePointTo(CharacterType targetType)
     {
         PauseGame();
         switch (targetType)

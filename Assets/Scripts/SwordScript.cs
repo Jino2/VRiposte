@@ -26,7 +26,7 @@ public class SwordDetectionScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            gameManager.Hit(CharacterType.Enemy);
+            gameManager.LosePointTo(CharacterType.Enemy);
         }
     }
 }
