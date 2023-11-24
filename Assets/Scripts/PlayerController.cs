@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 inputAxis;
 
     private CharacterController characterController;
+    private GameManager gameManager;
 
     [SerializeField] private float speed = 1f;
     
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.GetInstance();
         characterController = GetComponent<CharacterController>();
     }
 
@@ -28,6 +30,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        MoveCharacter();
+    }
+
+    private void MoveCharacter()
+    {
+        if (gameManager.isGamePaused) return;
         var direction = new Vector3(inputAxis.x, 0, inputAxis.y);
         characterController.Move(direction * (speed * Time.deltaTime));
     }

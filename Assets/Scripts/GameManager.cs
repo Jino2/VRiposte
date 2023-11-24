@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
     public float initTime = 30; 
     public int playerPoints { get; private set; } = 0;
     public int enemyPoints { get; private set; } = 0;
+    public bool isGamePaused {get ; private set;} = false;
 
-    public UnityEvent resetPlayer = null;
+    public UnityEvent onHit = null;
 
     private static GameManager instance;
     private GameTimer timer;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        isGamePaused = false;
         timer.Start();
     }
 
@@ -90,13 +92,13 @@ public class GameManager : MonoBehaviour
 
     private void PauseGame()
     {
+        isGamePaused = true;
         timer.Pause();
     }
 
     private void RestartGame()
     {
-        resetPlayer?.Invoke();
-        StartGame();
+        onHit?.Invoke();
     }
-    
+
 }
