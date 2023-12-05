@@ -29,6 +29,7 @@ public class ScreenFader : MonoBehaviour
         if (fading) return;
         fading = true;
         faded = true;
+        fadeImage.gameObject.SetActive(true);
         StartCoroutine(FadeOut());
     }
 
@@ -54,6 +55,7 @@ public class ScreenFader : MonoBehaviour
             fadeImage.color = newColor;
             yield return null;
         }
+        fadeImage.gameObject.SetActive(false);
         fading = false;
     }
 }
