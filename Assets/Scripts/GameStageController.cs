@@ -15,6 +15,7 @@ public class GameStageController : MonoBehaviour
         gameManager = GameManager.GetInstance();
     }
 
+    
     public void InitStage()
     {
         var stageMid = transform.position;

@@ -7990,7 +7990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1983304604
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8058,6 +8058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2006385352}
   - component: {fileID: 2006385353}
+  - component: {fileID: 2006385354}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -8099,6 +8100,22 @@ MonoBehaviour:
   enemyPointText: {fileID: 164627768}
   centerTimerText: {fileID: 319073519}
   gameResultText: {fileID: 1286065683}
+--- !u!114 &2006385354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006385351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8596f1cae0e844439910add15156e2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeImage: {fileID: 1983304605}
+  fadeInSpeed: 1
+  fadeOutSpeed: 10
+  gm: {fileID: 0}
 --- !u!114 &2021453383 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 19064736505062540, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
