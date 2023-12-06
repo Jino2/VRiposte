@@ -6,7 +6,6 @@ public class GameStageController : MonoBehaviour
 {
     public GameObject playerObject;
     public GameObject enemyObject;
-    public static float offsetF => 0.5f;
 
     private GameManager gameManager;
 
@@ -15,23 +14,21 @@ public class GameStageController : MonoBehaviour
         gameManager = GameManager.GetInstance();
     }
 
+
     public void InitStage()
     {
         var stageMid = transform.position;
-        playerObject.transform.position = stageMid - (transform.forward* 1.0f);
-        enemyObject.transform.position = stageMid + (transform.forward* 1.0f);
-    }
+        playerObject.transform.position = stageMid - (transform.forward * 1.0f);
+        enemyObject.transform.position = stageMid + (transform.forward * 1.0f);
 
-
-    private void OnCollisionExit(Collision other)
-    {
-        Debug.Log($"{other.gameObject.tag} is out");
+        foreach (Transform t in playerObject.transform)
+        {
+            if (t.CompareTag("XR Camera Offset")) t.localPosition = new Vector3(0f, 1.36144f, 0f);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log($"{other.gameObject.tag} is out - trigger");
-
         if (other.CompareTag("Player"))
         {
             gameManager.LosePointTo(CharacterType.Player);
