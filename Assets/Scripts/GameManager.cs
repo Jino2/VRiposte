@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
     /// </example>
     public void LosePointTo(CharacterType targetType)
     {
+        if (isGamePaused) return;
         PauseGame();
         switch (targetType)
         {
