@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
     {
         if (gameManager.isGamePaused) return; // 실제 device상 환경이랑 동작이 다름 테스트 필요
         var direction = new Vector3(inputAxis.x, 0, inputAxis.y);
-        Debug.LogWarning($"moved: {direction}");
         characterController.Move(direction * (speed * Time.deltaTime));
     }
 }

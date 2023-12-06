@@ -6745,8 +6745,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.999981, y: 0.30018187, z: 9.999999}
-  m_Center: {x: -0.000021159647, y: 0.08940723, z: -0.0000074931568}
+  m_Size: {x: 12.660892, y: 4.2367516, z: 9.999999}
+  m_Center: {x: -0.021195708, y: 1.1408253, z: -0.0000074931563}
 --- !u!1 &1811855789
 GameObject:
   m_ObjectHideFlags: 0
@@ -7377,6 +7377,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}

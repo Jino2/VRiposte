@@ -29,7 +29,6 @@ public class GameStageController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        return;
         if (other.CompareTag("Player"))
         {
             gameManager.LosePointTo(CharacterType.Player);
