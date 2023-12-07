@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var device = InputDevices.GetDeviceAtXRNode(inputSource);
+        var device = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+        Debug.Log($"{device.name}");
         device.TryGetFeatureValue(CommonUsages.primary2DAxis, out inputAxis);
     }
 

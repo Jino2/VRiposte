@@ -8,8 +8,8 @@ using Utils;
 public class GameManager : MonoBehaviour
 {
     public float initTime = 30;
-    public int playerPoints { get; private set; } = 0;
-    public int enemyPoints { get; private set; } = 0;
+    public int playerPoints { get; private set; }
+    public int enemyPoints { get; private set; }
     public bool isGamePaused { get; private set; } = true;
     public GameResult result { get; private set; } = GameResult.None;
     public UnityEvent startCountDownEvent = null;
@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
     /// </example>
     public void LosePointTo(CharacterType targetType)
     {
+        if (isGamePaused) return;
         PauseGame();
         switch (targetType)
         {

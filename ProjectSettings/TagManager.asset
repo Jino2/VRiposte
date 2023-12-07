@@ -8,6 +8,7 @@ TagManager:
   - Trail
   - Sword
   - Enemy
+  - XR Camera Offset
   layers:
   - Default
   - TransparentFX
