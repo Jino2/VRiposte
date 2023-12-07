@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Models;
 using UnityEngine;
 
-public class SwordDetectionScript : MonoBehaviour
+public class E_SwordScript : MonoBehaviour
 {
     public GameObject owner;
     
@@ -24,10 +24,10 @@ public class SwordDetectionScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            gameManager.LosePointTo(CharacterType.Enemy);
-            Debug.Log("Contact: Enemy");
+            gameManager.LosePointTo(CharacterType.Player);
+            Debug.Log("Contact: Player");
 
         }
     }

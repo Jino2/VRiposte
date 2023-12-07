@@ -6,12 +6,13 @@ public class EnemyAction : MonoBehaviour
 {
     private Animator animator;
     public Transform playerTransform;
-    public float moveSpeed = 0.2f;
-    public float closeDistance = 3.0f;
+    public float moveSpeed = 0.5f;
+    public float closeDistance = 2.5f;
 
-    private int currentAction = -1; // 현재 상태를 나타내는 변수
-    private int frameCounter = 0; // 프레임 카운터
-    private int minFrames = 3; // 상태가 유지되어야 하는 최소 프레임 수 (예: N = 60)
+    private int currentAction = -1;
+    private int lastAction = -1; // 마지막 액션 추적
+    private bool isActionCompleted = true;
+    private int retreatFrameCounter = 0; // 후퇴 프레임 카운터
 
     void Start()
     {
@@ -23,43 +24,70 @@ public class EnemyAction : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        Debug.Log("Distance: " + distanceToPlayer);
+
+        // 현재 애니메이션이 끝났는지 확인
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            isActionCompleted = true;
+        }
 
         if (distanceToPlayer > closeDistance)
         {
-            // 플레이어에게 접근
-            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-            transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
-
-            SetAction(3); // 이동 상태 설정
+            SetAction(0); // 이동 상태 설정
         }
-        else
+        else if(isActionCompleted)
         {
-            if (frameCounter >= minFrames)
+            if(currentAction == 1) // attack 후에는 retreat 선택
             {
-                // 프레임 카운터가 최소 프레임 수에 도달하면 새로운 행동 선택
-                SetAction(Random.Range(0, 3));
-                frameCounter = 0; // 프레임 카운터 재설정
+                SetAction(3);
             }
             else
             {
-                frameCounter++; // 프레임 카운터 증가
+                int newAction;
+                do
+                {
+                    newAction = Random.Range(1, 3); // 같은 액션을 연속해서 취하지 않도록 랜덤 선택
+                } while (newAction == lastAction);
+                
+                SetAction(newAction);
+            }
+        }
+
+        if(currentAction == 3 && isActionCompleted)
+        {
+            if (retreatFrameCounter < 30)
+            {
+                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                transform.position -= directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
+                retreatFrameCounter++;
+            }
+            else
+            {
+                retreatFrameCounter = 0; // 카운터 초기화
+                isActionCompleted = true; // 후퇴 완료
+            }
+        }
+        else
+        {
+            if (currentAction == 0 && isActionCompleted) // 이동
+            {
+                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
             }
         }
     }
 
     void SetAction(int action)
     {
-        if (action != currentAction)
+        if (action != currentAction && isActionCompleted && action != lastAction)
         {
-            // 애니메이션 상태 변경
-            // animator.setBool("idle", action==4)
-            animator.SetBool("isWalking", action == 3);
-            animator.SetBool("attack", action == 0);
-            animator.SetBool("dodge", action == 1);
+            animator.SetBool("isWalking", action == 0);
+            animator.SetBool("attack", action == 1);
             animator.SetBool("retreat", action == 2);
-            currentAction = action; // 현재 상태 업데이트
-            frameCounter = 0; // 프레임 카운터 재설정
+            animator.SetBool("dodge", action == 3);
+            lastAction = currentAction;
+            currentAction = action;
+            isActionCompleted = false;
         }
     }
 }
