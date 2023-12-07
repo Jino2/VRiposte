@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class E_SwordScript : MonoBehaviour
 {
-    public GameObject owner;
-    
     private GameManager gameManager;
     
     // Start is called before the first frame update
@@ -16,19 +14,14 @@ public class E_SwordScript : MonoBehaviour
         this.gameManager = GameManager.GetInstance();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             gameManager.LosePointTo(CharacterType.Player);
             Debug.Log("Contact: Player");
 
         }
+        
     }
 }

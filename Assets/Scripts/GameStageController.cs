@@ -18,8 +18,8 @@ public class GameStageController : MonoBehaviour
     public void InitStage()
     {
         var stageMid = transform.position;
-        playerObject.transform.position = stageMid - (transform.forward * 1.0f);
-        enemyObject.transform.position = stageMid + (transform.forward * 1.0f);
+        playerObject.transform.position = stageMid - (transform.forward * 2.0f);
+        enemyObject.transform.position = stageMid + (transform.forward * 2.0f);
 
         foreach (Transform t in playerObject.transform)
         {
