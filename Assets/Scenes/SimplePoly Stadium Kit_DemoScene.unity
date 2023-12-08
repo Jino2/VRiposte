@@ -402,7 +402,7 @@ CapsuleCollider:
   m_Radius: 0.24367523
   m_Height: 0.7096839
   m_Direction: 1
-  m_Center: {x: -0.00036621094, y: 1.0137558, z: 0.9118993}
+  m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!54 &107437002
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -425,8 +425,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2731,7 +2731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   moveSpeed: 0.5
-  closeDistance: 2.5
+  closeDistance: 2.3
 --- !u!1 &1029784354
 GameObject:
   m_ObjectHideFlags: 0
@@ -7651,7 +7651,7 @@ PrefabInstance:
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
