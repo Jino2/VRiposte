@@ -10,9 +10,11 @@ public class HudUiController : MonoBehaviour
         public TMP_Text playerPointText;
         public TMP_Text enemyPointText;
         public TMP_Text centerTimerText;
-        public TMP_Text gameResultText;
-        
-        private GameManager gameManager;
+        public Canvas WinCanvas;
+        public Canvas LoseCanvas;
+        public Canvas DrawCanvas;
+
+    private GameManager gameManager;
         
         private void Start()
         {
@@ -30,27 +32,26 @@ public class HudUiController : MonoBehaviour
             remainTimeText.text = $"{gameManager.GetRemainTime():F4}";
             playerPointText.text = $"{gameManager.playerPoints}";
             enemyPointText.text = $"{gameManager.enemyPoints}";
-            gameResultText.text = GetGameResultString();
+            GetGameResultString();
         }
 
-        private string GetGameResultString()
+        private void GetGameResultString()
         {
             switch (gameManager.result)
             {
                 case GameResult.None:
-                    gameResultText.gameObject.SetActive(false);
+                    DrawCanvas.enabled = true;
                     break;
                 case GameResult.PlayerWin:
-                    gameResultText.gameObject.SetActive(true);
-                    return "Win !!";
+                    WinCanvas.enabled = true;
+                    break;
                 case GameResult.PlayerLose:
-                    gameResultText.gameObject.SetActive(true);
-                    return "Lose..TT";
+                    LoseCanvas.enabled = true;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            return null;
         }
 
         public void StartCounter(int timerSeconds = 3)

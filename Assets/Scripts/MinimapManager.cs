@@ -1,4 +1,3 @@
-// 예시 코드 (C#)
 using UnityEngine;
 
 public class DualMinimapManager : MonoBehaviour
