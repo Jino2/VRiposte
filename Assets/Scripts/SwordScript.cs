@@ -22,13 +22,17 @@ public class SwordDetectionScript : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             gameManager.LosePointTo(CharacterType.Enemy);
             Debug.Log("Contact: Enemy");
 
-        }
+        } 
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
     }
 }
