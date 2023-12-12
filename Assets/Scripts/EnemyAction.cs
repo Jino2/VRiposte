@@ -72,6 +72,7 @@ public class EnemyAction : MonoBehaviour
             if (currentAction == 0 && isActionCompleted) // 이동
             {
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                directionToPlayer.y = 0; // y 축 값은 0으로 설정하여 무시합니다.
                 transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
             }
         }
