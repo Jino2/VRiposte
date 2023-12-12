@@ -2,32 +2,32 @@ using UnityEngine;
 
 public class DualMinimapManager : MonoBehaviour
 {
-    public GameObject playerMinimapPanel; // ¹Ì¸® »ı¼ºµÈ ÇÃ·¹ÀÌ¾î ÆĞ³ÎÀ» Inspector¿¡¼­ ÇÒ´ç
-    public GameObject enemyMinimapPanel; // ¹Ì¸® »ı¼ºµÈ Àû ÆĞ³ÎÀ» Inspector¿¡¼­ ÇÒ´ç
-    public Transform playerObject; // ÇÃ·¹ÀÌ¾îÀÇ Transform ÄÄÆ÷³ÍÆ®¸¦ ÇÒ´ç
-    public Transform enemyObject; // ÀûÀÇ Transform ÄÄÆ÷³ÍÆ®¸¦ ÇÒ´ç
+    public GameObject playerMinimapPanel; // ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ğ³ï¿½ï¿½ï¿½ Inspectorï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
+    public GameObject enemyMinimapPanel; // ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ğ³ï¿½ï¿½ï¿½ Inspectorï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
+    public Transform playerObject; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Transform ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ò´ï¿½
+    public Transform enemyObject; // ï¿½ï¿½ï¿½ï¿½ Transform ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ò´ï¿½
     public Vector3 playerInitialOffset;
     public Vector3 enemyInitialOffset;
-    public float movementRatio = 0.1f; // ÀÌµ¿ ºñÀ² Á¶Á¤
+    public float movementRatio = 0.1f; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private Vector3 playerInitialPosition;
     private Vector3 enemyInitialPosition;
 
     void Start()
     {
-        // ÀÌ¹Ì »ı¼ºµÈ ÆĞ³ÎµéÀÇ ÃÊ±â À§Ä¡¸¦ ÀúÀå
+        // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ğ³Îµï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         playerInitialPosition = playerMinimapPanel.transform.position;
         enemyInitialPosition = enemyMinimapPanel.transform.position;
     }
 
     void Update()
     {
-        // ÀÌµ¿ ºñÀ²À» Àû¿ëÇÏ¿© ÇÃ·¹ÀÌ¾î ÆĞ³ÎÀÇ À§Ä¡¸¦ ¾÷µ¥ÀÌÆ® (z ÁÂÇ¥¸¸ ¹İ¿µ)
-        float playerOffsetZ = playerInitialOffset.z + (playerObject.position.z - transform.position.z) * movementRatio;
-        playerMinimapPanel.transform.position = new Vector3(playerInitialPosition.x, playerInitialPosition.y, playerInitialPosition.z + playerOffsetZ);
-
-        // ÀÌµ¿ ºñÀ²À» Àû¿ëÇÏ¿© Àû ÆĞ³ÎÀÇ À§Ä¡¸¦ ¾÷µ¥ÀÌÆ® (z ÁÂÇ¥¸¸ ¹İ¿µ)
-        float enemyOffsetZ = enemyInitialOffset.z - (enemyObject.position.z - transform.position.z) * movementRatio;
-        enemyMinimapPanel.transform.position = new Vector3(enemyInitialPosition.x, enemyInitialPosition.y, enemyInitialPosition.z + enemyOffsetZ);
+        // ì´ë™ ë¹„ìœ¨ì„ ì ìš©í•˜ì—¬ í”Œë ˆì´ì–´ íŒ¨ë„ì˜ ìœ„ì¹˜ë¥¼ ì—…ë°ì´íŠ¸ (z ì¢Œí‘œë§Œ ë°˜ì˜)
+        float playerOffsetZ = (playerInitialOffset.z - playerObject.position.z) * movementRatio;
+        playerMinimapPanel.transform.localPosition = new Vector3(0, -playerOffsetZ, 0);
+        
+        // ì´ë™ ë¹„ìœ¨ì„ ì ìš©í•˜ì—¬ ì  íŒ¨ë„ì˜ ìœ„ì¹˜ë¥¼ ì—…ë°ì´íŠ¸ (z ì¢Œí‘œë§Œ ë°˜ì˜)
+        float enemyOffsetZ = (enemyInitialOffset.z - enemyObject.position.z) * movementRatio;
+        enemyMinimapPanel.transform.localPosition = new Vector3(0, -enemyOffsetZ, 0);
     }
 }

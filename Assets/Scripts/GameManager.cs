@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(targetType), targetType, null);
         }
-        if(playerPoints < 15 && enemyPoints < 15 ) RestartGame();
+        if(playerPoints < 5 && enemyPoints < 5 ) RestartGame();
         else FinishGame();
     }
 
