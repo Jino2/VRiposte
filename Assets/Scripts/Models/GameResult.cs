@@ -8,5 +8,6 @@ namespace Models
         None, // still playing
         PlayerWin,
         PlayerLose,
+        PlayerDraw,
     }
 }
