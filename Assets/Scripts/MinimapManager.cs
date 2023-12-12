@@ -22,12 +22,12 @@ public class DualMinimapManager : MonoBehaviour
 
     void Update()
     {
-        // 이동 비율을 적용하여 플레이어 패널의 위치를 업데이트 (y 좌표만 반영)
-        float playerOffsetY = playerInitialOffset.y + (playerObject.position.y - transform.position.y) * movementRatio;
-        playerMinimapPanel.transform.position = new Vector3(playerInitialPosition.x, playerInitialPosition.y + playerOffsetY, playerInitialPosition.z);
+        // 이동 비율을 적용하여 플레이어 패널의 위치를 업데이트 (z 좌표만 반영)
+        float playerOffsetZ = playerInitialOffset.z + (playerObject.position.z - transform.position.z) * movementRatio;
+        playerMinimapPanel.transform.position = new Vector3(playerInitialPosition.x, playerInitialPosition.y, playerInitialPosition.z + playerOffsetZ);
 
-        // 이동 비율을 적용하여 적 패널의 위치를 업데이트 (y 좌표만 반영)
-        float enemyOffsetY = enemyInitialOffset.y - (enemyObject.position.y - transform.position.y) * movementRatio;
-        enemyMinimapPanel.transform.position = new Vector3(enemyInitialPosition.x, enemyInitialPosition.y + enemyOffsetY, enemyInitialPosition.z);
+        // 이동 비율을 적용하여 적 패널의 위치를 업데이트 (z 좌표만 반영)
+        float enemyOffsetZ = enemyInitialOffset.z - (enemyObject.position.z - transform.position.z) * movementRatio;
+        enemyMinimapPanel.transform.position = new Vector3(enemyInitialPosition.x, enemyInitialPosition.y, enemyInitialPosition.z + enemyOffsetZ);
     }
 }
