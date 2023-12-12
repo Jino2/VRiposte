@@ -40,13 +40,15 @@ public class HudUiController : MonoBehaviour
             switch (gameManager.result)
             {
                 case GameResult.None:
-                    DrawCanvas.enabled = true;
+                    break;
+                case GameResult.PlayerDraw:
+                    DrawCanvas.gameObject.SetActive(true);
                     break;
                 case GameResult.PlayerWin:
-                    WinCanvas.enabled = true;
+                    WinCanvas.gameObject.SetActive(true);
                     break;
                 case GameResult.PlayerLose:
-                    LoseCanvas.enabled = true;
+                    LoseCanvas.gameObject.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
