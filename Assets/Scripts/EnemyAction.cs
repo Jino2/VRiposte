@@ -7,7 +7,7 @@ public class EnemyAction : MonoBehaviour
     private Animator animator;
     public Transform playerTransform;
     public float moveSpeed = 0.5f;
-    public float closeDistance = 3.0f;
+    public float closeDistance = 4.0f;
     public float attackDistance = 2.0f;
     private int currentAction = -1;
     private int lastAction = -1; // 마지막 액션 추적
@@ -27,34 +27,40 @@ public class EnemyAction : MonoBehaviour
         distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         directionToPlayer = (playerTransform.position - transform.position).normalized;
         directionToPlayer.y = 0;
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
+        if (stateInfo.IsName("WalkForwardFencing"))
+        {
+            transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
+        }
+        if (stateInfo.IsName("RunForwardFencing"))
+        {
+            transform.position += 3*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
+        }
+        if (stateInfo.IsName("RunBackwardsFencing"))
+        {
+            transform.position -= 3*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
+        }
+        if(distanceToPlayer<attackDistance){
+            Debug.Log(distanceToPlayer);
+            ChooseNewAction(2);
+        }
         if(distanceToPlayer<closeDistance){
             Debug.Log(distanceToPlayer);
-            ChooseNewAction();
+            ChooseNewAction(1);
         }
         if(distanceToPlayer>closeDistance){
             Debug.Log(distanceToPlayer);
             SetAction(0);
         }
 
-        if (currentAction == 0)
-        {
-            transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
-        }
-        if (currentAction == 1)
-        {
-            transform.position += 2*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
-        }
-        if (currentAction == 2)
-        {
-            transform.position -= 2*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
-        }
+
     }
 
-    void ChooseNewAction()
+    void ChooseNewAction(int s)
     {
         int newAction;
-        newAction = Random.Range(1, 5); // 1부터 3까지 랜덤 선택 (attack, dodge, retreat)
+        newAction = Random.Range(s, 5); // 1부터 3까지 랜덤 선택 (attack, dodge, retreat)
         SetAction(newAction);
     }
 

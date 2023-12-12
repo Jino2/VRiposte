@@ -4868,7 +4868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   moveSpeed: 0.5
-  closeDistance: 3
+  closeDistance: 4
   attackDistance: 2
 --- !u!1 &1010378540
 GameObject:
