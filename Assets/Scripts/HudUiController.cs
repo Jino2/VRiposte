@@ -66,7 +66,7 @@ public class HudUiController : MonoBehaviour
             if (timerSeconds == 0)
             {
                 centerTimerText.gameObject.SetActive(false);
-                gameManager.StartGame();
+                gameManager.ResumeGame();
                 yield break;
             }
             centerTimerText.gameObject.SetActive(true);

@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
@@ -38,7 +37,8 @@ public class GameManager : MonoBehaviour
     {
         this.timer = new GameTimer(startTime: initTime);
         actionInitPosition?.Invoke();
-        startCountDownEvent?.Invoke();
+        Debug.LogWarning($"starting script game manager");
+        StartGame();
     }
 
     // Update is called once per frame
@@ -54,6 +54,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame()
+    {
+        this.timer = new GameTimer(startTime: initTime);
+        startCountDownEvent.Invoke();
+    }
+
+    public void ResumeGame()
     {
         isGamePaused = false;
         timer.Start();
