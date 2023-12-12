@@ -69,7 +69,13 @@ public class GameManager : MonoBehaviour
     // TODO : 시간 다됐을때 결과 안나도 끝남.. 처리 필요한데 일단 15분이라는 시간안에는 게임이 끝날것같아서 미룸
     private GameResult GetResultByPoint()
     {
-        return playerPoints > enemyPoints ? GameResult.PlayerWin : GameResult.PlayerLose;
+
+        if (playerPoints > enemyPoints)
+            return GameResult.PlayerWin;
+        if (playerPoints < enemyPoints)
+            return GameResult.PlayerLose;
+        
+        return GameResult.PlayerDraw;
     }
 
 

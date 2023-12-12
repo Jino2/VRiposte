@@ -40,6 +40,8 @@ public class HudUiController : MonoBehaviour
             switch (gameManager.result)
             {
                 case GameResult.None:
+                    break;
+                case GameResult.PlayerDraw:
                     DrawCanvas.gameObject.SetActive(true);
                     break;
                 case GameResult.PlayerWin:
