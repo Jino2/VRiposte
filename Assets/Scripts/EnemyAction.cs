@@ -14,16 +14,22 @@ public class EnemyAction : MonoBehaviour
     float distanceToPlayer;
     Vector3 directionToPlayer;
 
+    private GameManager gm;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         animator.SetBool("isWalking", true);
         currentAction=0;
+        
+        gm = GameManager.GetInstance();
     }
 
     void Update()
     {
+        if (gm.isGamePaused) return;
+        
         distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         directionToPlayer = (playerTransform.position - transform.position).normalized;
         directionToPlayer.y = 0;
@@ -39,15 +45,15 @@ public class EnemyAction : MonoBehaviour
 
         if (currentAction == 0)
         {
-            transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
+            transform.position += directionToPlayer * (moveSpeed * Time.deltaTime);
         }
         if (currentAction == 1)
         {
-            transform.position += 2*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
+            transform.position += directionToPlayer * (2 * moveSpeed * Time.deltaTime); // 후퇴
         }
         if (currentAction == 2)
         {
-            transform.position -= 2*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
+            transform.position -= directionToPlayer * (2 * moveSpeed * Time.deltaTime); // 후퇴
         }
     }
 
