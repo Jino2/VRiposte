@@ -7,87 +7,68 @@ public class EnemyAction : MonoBehaviour
     private Animator animator;
     public Transform playerTransform;
     public float moveSpeed = 0.5f;
-    public float closeDistance = 2.5f;
-
+    public float closeDistance = 3.0f;
+    public float attackDistance = 2.0f;
     private int currentAction = -1;
     private int lastAction = -1; // 마지막 액션 추적
-    private bool isActionCompleted = true;
-    private int retreatFrameCounter = 0; // 후퇴 프레임 카운터
+    float distanceToPlayer;
+    Vector3 directionToPlayer;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         animator.SetBool("isWalking", true);
+        currentAction=0;
     }
 
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        directionToPlayer = (playerTransform.position - transform.position).normalized;
+        directionToPlayer.y = 0;
 
-        // 현재 애니메이션이 끝났는지 확인
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        {
-            isActionCompleted = true;
+        if(distanceToPlayer<closeDistance){
+            Debug.Log(distanceToPlayer);
+            ChooseNewAction();
         }
-
-        if (distanceToPlayer > closeDistance)
-        {
-            SetAction(0); // 이동 상태 설정
-        }
-        else if(isActionCompleted)
-        {
-            if(currentAction == 1) // attack 후에는 retreat 선택
-            {
-                SetAction(3);
-            }
-            else
-            {
-                int newAction;
-                do
-                {
-                    newAction = Random.Range(1, 3); // 같은 액션을 연속해서 취하지 않도록 랜덤 선택
-                } while (newAction == lastAction);
-                
-                SetAction(newAction);
-            }
+        if(distanceToPlayer>closeDistance){
+            Debug.Log(distanceToPlayer);
+            SetAction(0);
         }
 
-        if(currentAction == 3 && isActionCompleted)
+        if (currentAction == 0)
         {
-            if (retreatFrameCounter < 30)
-            {
-                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-                transform.position -= directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
-                retreatFrameCounter++;
-            }
-            else
-            {
-                retreatFrameCounter = 0; // 카운터 초기화
-                isActionCompleted = true; // 후퇴 완료
-            }
+            transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
         }
-        else
+        if (currentAction == 1)
         {
-            if (currentAction == 0 && isActionCompleted) // 이동
-            {
-                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-                transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
-            }
+            transform.position += 2*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
         }
+        if (currentAction == 2)
+        {
+            transform.position -= 2*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
+        }
+    }
+
+    void ChooseNewAction()
+    {
+        int newAction;
+        newAction = Random.Range(1, 5); // 1부터 3까지 랜덤 선택 (attack, dodge, retreat)
+        SetAction(newAction);
     }
 
     void SetAction(int action)
     {
-        if (action != currentAction && isActionCompleted && action != lastAction)
-        {
-            animator.SetBool("isWalking", action == 0);
-            animator.SetBool("attack", action == 1);
-            animator.SetBool("retreat", action == 2);
-            animator.SetBool("dodge", action == 3);
-            lastAction = currentAction;
-            currentAction = action;
-            isActionCompleted = false;
+        animator.SetBool("isWalking", action == 0);
+        animator.SetBool("run", action==1);
+        animator.SetBool("attack", action >= 3);
+        animator.SetBool("retreat", action == 2);
+        if(action>=2){
+            int newAction; 
+            newAction = Random.Range(0, 5); // 1부터 3까지 랜덤 선택 (attack, dodge, retreat)
+            animator.SetInteger("att_motion",newAction);
         }
+        currentAction = action;
     }
 }
