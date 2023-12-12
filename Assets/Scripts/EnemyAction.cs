@@ -41,6 +41,10 @@ public class EnemyAction : MonoBehaviour
         {
             transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
         }
+        if (currentAction == 1)
+        {
+            transform.position += 2*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
+        }
         if (currentAction == 2)
         {
             transform.position -= 2*directionToPlayer * moveSpeed * Time.deltaTime; // 후퇴
@@ -50,15 +54,16 @@ public class EnemyAction : MonoBehaviour
     void ChooseNewAction()
     {
         int newAction;
-        newAction = Random.Range(1, 4); // 1부터 3까지 랜덤 선택 (attack, dodge, retreat)
+        newAction = Random.Range(1, 5); // 1부터 3까지 랜덤 선택 (attack, dodge, retreat)
         SetAction(newAction);
     }
 
     void SetAction(int action)
     {
         animator.SetBool("isWalking", action == 0);
-        animator.SetBool("attack", action >= 2);
-        animator.SetBool("retreat", action == 1);
+        animator.SetBool("run", action==1);
+        animator.SetBool("attack", action >= 3);
+        animator.SetBool("retreat", action == 2);
         if(action>=2){
             int newAction; 
             newAction = Random.Range(0, 5); // 1부터 3까지 랜덤 선택 (attack, dodge, retreat)
